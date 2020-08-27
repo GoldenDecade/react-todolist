@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-
+import PropTypes from 'prop-types';
 class TodoItem extends Component {
     constructor(props) {
         super(props);
@@ -17,4 +17,11 @@ class TodoItem extends Component {
         )
     }
 }
+TodoItem.propTypes = {
+    task: PropTypes.oneOfType([PropTypes.number, PropTypes.string])
+};
+TodoItem.defaultProps = {
+    task: 'hello'
+}
+
 export default TodoItem;
