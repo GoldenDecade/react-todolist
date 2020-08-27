@@ -30,13 +30,7 @@ class Todolist extends Component {
             // 展开运算符
             list: [...prevState.list, prevState.inputValue],
             inputValue: ''
-        }), () => {
-            const length = this.ul.current.querySelectorAll('div').length;
-            // task 双击弹出index
-            // console.log(this[`input${length - 1}`].current);
-            this[`input${length - 1}`].current.handleDoubleClick();
-        });
-        console.log(this.ul);
+        }));
     }
     handleInputChange(e) {
         // setState返回一个函数，而不是直接设置对象，性能会提升
@@ -54,7 +48,6 @@ class Todolist extends Component {
                         index={index}
                         delTask={this.delTask}
                         key={index}
-                        ref={this[`input${index}`] = React.createRef()}
                     />
                 })
     }
@@ -76,7 +69,7 @@ class Todolist extends Component {
                     </label>
                     <button onClick={this.handleClick}>提交</button>
                 </div>
-                <ul ref={this.ul = React.createRef()}>
+                <ul>
                     {this.getTodoItem()}
                 </ul>
             </Fragment>
