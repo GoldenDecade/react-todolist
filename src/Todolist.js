@@ -2,7 +2,6 @@
 // 解构赋值
 import React, {Component, Fragment} from 'react';
 import TodoItem from "./TodoItem";
-import axios from 'axios';
 
 class Todolist extends Component {
     constructor(props) {
@@ -52,18 +51,6 @@ class Todolist extends Component {
                     />
                 })
     }
-    componentDidMount() {
-        axios.get('/api/todolist')
-            .then((res)=> {
-                this.setState(() => ({
-                    list: [...res.data]
-                }))
-            })
-            .catch(() => {
-                console.log('request error');
-            })
-    }
-
     render() {
         return (
             <Fragment>
