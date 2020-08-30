@@ -1,9 +1,8 @@
-import React, { Component, Fragment } from 'react';
+import React, { Component } from 'react';
 import store from './store';
 import {getInputChangeAction, getAddItemAction, getDelItemAction} from './store/actionCreator'
-import { Button, Input, List } from 'antd';
-// 由于 antd 组件的默认文案是英文，所以需要修改为中文
-import 'antd/dist/antd.css';
+import TodoListUI from './TodoListUI'
+
 
 class TodoListAntd extends Component {
     constructor(props) {
@@ -28,6 +27,7 @@ class TodoListAntd extends Component {
             type: DEL_TODO_ITEM,
             index
         });*/
+        console.log(index);
         const action = getDelItemAction(index);
         store.dispatch(action);
     }
@@ -59,33 +59,13 @@ class TodoListAntd extends Component {
         store.dispatch(action);
     }
     render() {
-        return (
-            <Fragment>
-                { /*这样写注释*/ }
-                <div>
-                    {/*这里这样写注释*/}
-                    <label htmlFor="task">
-                        任务：
-                        <Input
-                            id="task"
-                            style={{"width": "200px", "marginRight": "10px"}}
-                            type="text"
-                            value={this.state.inputValue}
-                            onChange={this.handleInputChange}
-                        />
-                    </label>
-                    <Button
-                        type="primary"
-                        onClick={this.handleClick}>提交</Button>
-                </div>
-                <List
-                    header={<div>Today Task</div>}
-                    bordered
-                    dataSource={this.state.list}
-                    renderItem={(item, index) => <List.Item onClick={this.delTask.bind(this, index)}>{item}</List.Item>}
-                />
-            </Fragment>
-        )
+        return (<TodoListUI
+                    inputValue={this.state.inputValue}
+                    list={this.state.list}
+                    handleInputChange={this.handleInputChange}
+                    handleClick={this.handleClick}
+                    delTask={this.delTask}
+                />)
     }
 }
 
